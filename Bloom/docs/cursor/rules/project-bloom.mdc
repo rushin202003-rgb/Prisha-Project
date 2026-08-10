@@ -1,0 +1,24 @@
+---
+description: Project Bloom product and engineering rules
+alwaysApply: true
+---
+
+# Project Bloom Rules
+
+1. Treat `/docs` as the source of truth.
+2. Do not invent unresolved product decisions.
+3. If requirements conflict, stop and create an OPEN QUESTION.
+4. Keep the product iPad-first and student-first.
+5. Use SwiftUI for the native iOS/iPadOS client unless an approved architecture document says otherwise.
+6. Protect sleep, play, hobbies, meals, and family time.
+7. The AI must be encouraging, age-appropriate, and non-shaming.
+8. Never optimise the product for excessive screen time.
+9. Keep private journal content private unless explicit product requirements allow sharing.
+10. Every feature must include loading, empty, error, and success states.
+11. Accessibility is a requirement, not later polish.
+12. Test important business logic, especially scheduling and revision logic.
+13. Do not collect unnecessary personal data.
+14. Keep secrets out of source control.
+15. Make small, reviewable changes.
+16. Before large implementation, produce a plan and wait for approval.
+17. Update documentation when implementation changes documented behaviour.
