@@ -1,4 +1,4 @@
-# CURSOR-001 — Cross-Platform Cursor Build Handoff
+# IDE-001 — Cross-Platform AI IDE Build Handoff
 
 **Project:** Project Bloom  
 **Version:** 2.0.0  
@@ -147,4 +147,4 @@ Stop and ask for a decision if requirements conflict, a platform limitation chan
 
 ---
 
-**End of CURSOR-001**
+**End of IDE-001**

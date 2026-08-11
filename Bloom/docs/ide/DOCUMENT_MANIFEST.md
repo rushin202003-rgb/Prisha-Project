@@ -1,4 +1,4 @@
-# Project Bloom — Cursor Document Manifest
+# Project Bloom — IDE Document Manifest
 
 ## Upload now
 ### Product requirements
@@ -13,10 +13,10 @@
 - PRD-007 Part 2
 - PRD-007 Part 3
 
-### Cursor instructions
-- CURSOR_BUILD_GUIDE.md
+### Agent instructions
+- IDE_BUILD_GUIDE.md
 - DOCUMENT_MANIFEST.md
-- .cursor/rules/project-bloom.mdc
+- .agent/rules/project-bloom.mdc
 
 ## Still required for a production build
 

@@ -1,7 +1,7 @@
-# Cursor Build Guide — Project Bloom
+# AI IDE Build Guide — Project Bloom
 
 ## Objective
-Use Cursor to turn the Project Bloom specification into a production-quality iPad/iOS application.
+Use an AI IDE to turn the Project Bloom specification into a production-quality iPad/iOS application.
 
 ## Recommended workflow
 
@@ -9,15 +9,15 @@ Use Cursor to turn the Project Bloom specification into a production-quality iPa
 Create a repository such as `project-bloom` and upload this documentation pack.
 
 ### 2. Ingest before coding
-Ask Cursor:
+Ask the AI IDE:
 
 > Read the entire repository before writing code. Do not implement anything yet.
 >
 > Treat `/docs` as the product source of truth.
 >
-> Summarize the requirements, identify contradictions and missing specifications, and create `docs/cursor/IMPLEMENTATION_GAP_REPORT.md`.
+> Summarize the requirements, identify contradictions and missing specifications, and create `docs/ide/IMPLEMENTATION_GAP_REPORT.md`.
 >
-> Then create `docs/cursor/IMPLEMENTATION_PLAN.md` covering architecture, modules, data model, AI boundaries, testing, security/privacy, and release strategy.
+> Then create `docs/ide/IMPLEMENTATION_PLAN.md` covering architecture, modules, data model, AI boundaries, testing, security/privacy, and release strategy.
 >
 > Do not invent unresolved product decisions. Mark them as OPEN QUESTIONS.
 
@@ -56,7 +56,7 @@ Preferred client:
 Do not finalize a backend, AI provider, authentication provider, or cloud database until the architecture specification is complete.
 
 ## Cloud-agent caution
-Cursor Cloud agents can work in isolated development environments and can be managed from Cursor's iOS app. Do not assume a generic hosted cloud VM is equivalent to an Apple macOS/Xcode/App Store signing environment. Validate final archive, signing, provisioning, TestFlight, and App Store workflows in an Apple-supported macOS/Xcode environment or an explicitly configured CI system.
+AI Cloud agents can work in isolated development environments and can be managed from their respective companion apps. Do not assume a generic hosted cloud VM is equivalent to an Apple macOS/Xcode/App Store signing environment. Validate final archive, signing, provisioning, TestFlight, and App Store workflows in an Apple-supported macOS/Xcode environment or an explicitly configured CI system.
 
 ## Definition of done
 A feature needs:
