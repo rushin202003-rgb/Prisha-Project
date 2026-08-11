@@ -49,7 +49,7 @@ class Task {
   @enumerated
   final TaskStatus status;
 
-  const Task({
+  Task({
     required this.id,
     required this.studentId,
     this.subjectId,

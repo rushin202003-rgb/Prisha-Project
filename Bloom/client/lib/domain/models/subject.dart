@@ -18,12 +18,14 @@ class Subject {
   
   final String studentId;
   final String name;
+  final String colorHex;
   final bool active;
 
   const Subject({
     required this.id,
     required this.studentId,
     required this.name,
+    this.colorHex = '#9C27B0',
     this.active = true,
   });
 }

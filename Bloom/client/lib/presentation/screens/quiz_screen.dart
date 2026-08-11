@@ -80,12 +80,13 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
             const SizedBox(height: 16),
             Text(
-              question.questionText,
+              question.questionText ?? '',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 32),
-            ...List.generate(question.options.length, (index) {
+            ...List.generate(question.options?.length ?? 0, (index) {
               final isSelected = _selectedOptionIndex == index;
+              final optionText = question.options?[index] ?? '';
               return Padding(
                 padding: const EdgeInsets.only(bottom: 12.0),
                 child: OutlinedButton(
@@ -103,7 +104,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      question.options[index],
+                      optionText,
                       style: TextStyle(
                         color: isSelected ? Colors.pinkAccent : Colors.black87,
                       ),

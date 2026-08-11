@@ -60,7 +60,7 @@ class _WorksheetScreenState extends State<WorksheetScreen> {
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
-                          problem.problemText,
+                          problem.problemText ?? '',
                           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -90,7 +90,11 @@ class _WorksheetScreenState extends State<WorksheetScreen> {
                       hintText: 'Type your answer here...',
                       border: OutlineInputBorder(),
                     ),
-                    onChanged: (val) => _answers[problem.id] = val,
+                    onChanged: (val) {
+                      if (problem.id != null) {
+                        _answers[problem.id!] = val;
+                      }
+                    },
                   ),
                 ],
               ),

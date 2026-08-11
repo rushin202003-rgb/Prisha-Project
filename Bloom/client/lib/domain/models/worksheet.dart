@@ -26,7 +26,7 @@ class Worksheet {
   final String subjectId;
   final List<WorksheetProblem> problems;
 
-  const Worksheet({
+  Worksheet({
     required this.id,
     required this.title,
     required this.subjectId,
