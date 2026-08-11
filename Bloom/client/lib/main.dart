@@ -24,9 +24,11 @@ import 'data/services/cloud_sync_service.dart';
 import 'data/services/supabase_sync_service.dart';
 import 'domain/services/ai_gateway.dart';
 import 'data/services/mock_ai_gateway.dart';
+import 'data/services/gemini_ai_gateway.dart';
 import 'domain/services/auth_service.dart';
 import 'data/services/mock_auth_service.dart';
 import 'presentation/screens/login_screen.dart';
+import 'data/services/local_notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -68,8 +70,14 @@ void main() async {
   final repository = IsarStudentRepository(isar);
   final syncService = SupabaseSyncService(Supabase.instance.client);
   final offlineManager = OfflineManager(isar: isar, syncService: syncService);
-  final aiGateway = MockAIGateway();
+  
+  final geminiApiKey = dotenv.env['GEMINI_API_KEY'] ?? '';
+  final aiGateway = GeminiAIGateway(geminiApiKey);
   final authService = MockAuthService();
+  
+  final notificationService = LocalNotificationService();
+  await notificationService.init();
+  await notificationService.requestPermission();
 
   // Initialize dummy data if empty
   final profilesCount = await isar.studentProfiles.count();

@@ -48,7 +48,22 @@ class _TodayScreenState extends State<TodayScreen> {
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to generate task material: $e')),
+          SnackBar(
+            backgroundColor: const Color(0xFFFDE8F0),
+            content: Row(
+              children: [
+                const Text('🌸', style: TextStyle(fontSize: 20)),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "My brain is a bit tired right now! You can still work on your offline tasks 📚",
+                    style: const TextStyle(color: Color(0xFF4A3F55)),
+                  ),
+                ),
+              ],
+            ),
+            duration: const Duration(seconds: 4),
+          ),
         );
       }
     } finally {

@@ -1,0 +1,45 @@
+name: Bloom CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Lint, Test & Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.0'
+          channel: 'stable'
+          cache: true
+
+      - name: Install dependencies
+        run: flutter pub get
+        working-directory: client
+
+      - name: Create .env placeholder (CI secrets)
+        run: |
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> client/.env
+          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> client/.env
+          echo "GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}" >> client/.env
+
+      - name: Lint (flutter analyze)
+        run: flutter analyze
+        working-directory: client
+
+      - name: Run tests (flutter test)
+        run: flutter test
+        working-directory: client
+
+      - name: Build debug APK (compilation verification)
+        run: flutter build apk --debug
+        working-directory: client
