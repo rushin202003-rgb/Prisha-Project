@@ -26,7 +26,9 @@ import 'domain/services/ai_gateway.dart';
 import 'data/services/mock_ai_gateway.dart';
 import 'data/services/gemini_ai_gateway.dart';
 import 'domain/services/auth_service.dart';
+import 'package:flutter/foundation.dart';
 import 'data/services/mock_auth_service.dart';
+import 'data/services/supabase_auth_service.dart';
 import 'presentation/screens/login_screen.dart';
 import 'data/services/local_notification_service.dart';
 
@@ -73,7 +75,10 @@ void main() async {
   
   final geminiApiKey = dotenv.env['GEMINI_API_KEY'] ?? '';
   final aiGateway = GeminiAIGateway(geminiApiKey);
-  final authService = MockAuthService();
+  
+  final AuthService authService = kDebugMode && dotenv.env['USE_MOCK_AUTH'] == 'true' 
+      ? MockAuthService() 
+      : SupabaseAuthService();
   
   final notificationService = LocalNotificationService();
   await notificationService.init();

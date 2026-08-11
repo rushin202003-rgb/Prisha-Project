@@ -23,10 +23,27 @@ class MockAuthService implements AuthService {
   }
 
   @override
+  Future<void> signUpWithEmail(String email, String password) async {
+    await Future.delayed(const Duration(milliseconds: 800));
+    _currentUserId = '1';
+    _authStateController.add(_currentUserId);
+  }
+
+  @override
+  Future<void> resetPassword(String email) async {
+    await Future.delayed(const Duration(milliseconds: 400));
+  }
+
+  @override
   Future<void> signOut() async {
     await Future.delayed(const Duration(milliseconds: 400));
     _currentUserId = null;
     _authStateController.add(null);
+  }
+
+  @override
+  Future<void> signOutAllDevices() async {
+    await signOut();
   }
 
   @override

@@ -46,6 +46,75 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
+  void _handleSignUp() async {
+    if (_emailController.text.isEmpty || _passwordController.text.isEmpty) {
+      setState(() {
+        _errorMessage = 'Please fill in both email and password to sign up';
+      });
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      await widget.authService.signUpWithEmail(
+        _emailController.text,
+        _passwordController.text,
+      );
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Verification email sent! Please check your inbox.')),
+        );
+      }
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Failed to sign up: ${e.toString()}';
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
+  void _handlePasswordReset() async {
+    if (_emailController.text.isEmpty) {
+      setState(() {
+        _errorMessage = 'Please enter your email to reset password';
+      });
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+      _errorMessage = null;
+    });
+
+    try {
+      await widget.authService.resetPassword(_emailController.text);
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Password reset link sent to your email.')),
+        );
+      }
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Failed to reset password: ${e.toString()}';
+      });
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    }
+  }
+
   void _handleThirdPartySignIn(String provider) async {
     setState(() {
       _isLoading = true;
@@ -166,17 +235,37 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 24),
                     _isLoading
                         ? const Center(child: CircularProgressIndicator())
-                        : ElevatedButton(
-                            onPressed: _handleEmailSignIn,
-                            style: ElevatedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              backgroundColor: Colors.pinkAccent,
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
+                        : Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              ElevatedButton(
+                                onPressed: _handleEmailSignIn,
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  backgroundColor: Colors.pinkAccent,
+                                  foregroundColor: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                ),
+                                child: const Text('Sign In', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                               ),
-                            ),
-                            child: const Text('Sign In', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 12),
+                              OutlinedButton(
+                                onPressed: _handleSignUp,
+                                style: OutlinedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                ),
+                                child: const Text('Sign Up', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                              ),
+                              TextButton(
+                                onPressed: _handlePasswordReset,
+                                child: const Text('Forgot Password?'),
+                              ),
+                            ],
                           ),
                     const SizedBox(height: 24),
                     Row(
