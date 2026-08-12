@@ -15,7 +15,8 @@ class LocalNotificationService implements NotificationService {
   Future<void> init() async {
     tz_data.initializeTimeZones();
 
-    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
+    const androidSettings =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
     const iosSettings = DarwinInitializationSettings(
       requestAlertPermission: false,
       requestBadgePermission: false,
@@ -54,7 +55,9 @@ class LocalNotificationService implements NotificationService {
 
   @override
   Future<void> scheduleTaskReminder(Task task) async {
-    final reminderTime = task.dueAt.subtract(const Duration(minutes: 30));
+    final dueAt = task.dueAt;
+    if (dueAt == null) return;
+    final reminderTime = dueAt.subtract(const Duration(minutes: 30));
     if (reminderTime.isBefore(DateTime.now())) return;
 
     const androidDetails = AndroidNotificationDetails(

@@ -8,13 +8,13 @@ class Hobby {
 
   @Index(unique: true)
   final String id;
-  
+
   final String studentId;
   final String name;
   final String? description;
   final int targetMinutesPerWeek;
 
-  const Hobby({
+  Hobby({
     required this.id,
     required this.studentId,
     required this.name,
@@ -29,12 +29,12 @@ class HobbySession {
 
   @Index(unique: true)
   final String id;
-  
+
   final String hobbyId;
   final DateTime date;
   final int durationMinutes;
 
-  const HobbySession({
+  HobbySession({
     required this.id,
     required this.hobbyId,
     required this.date,

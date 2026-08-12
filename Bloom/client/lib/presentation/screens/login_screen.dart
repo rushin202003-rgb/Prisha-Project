@@ -66,7 +66,9 @@ class _LoginScreenState extends State<LoginScreen> {
       );
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Verification email sent! Please check your inbox.')),
+          const SnackBar(
+              content:
+                  Text('Verification email sent! Please check your inbox.')),
         );
       }
     } catch (e) {
@@ -99,7 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
       await widget.authService.resetPassword(_emailController.text);
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Password reset link sent to your email.')),
+          const SnackBar(
+              content: Text('Password reset link sent to your email.')),
         );
       }
     } catch (e) {
@@ -124,7 +127,8 @@ class _LoginScreenState extends State<LoginScreen> {
     // Simulate oauth login delay
     await Future.delayed(const Duration(milliseconds: 700));
     try {
-      await widget.authService.signInWithEmail('mock_$provider@bloom.com', 'password');
+      await widget.authService
+          .signInWithEmail('mock_$provider@bloom.com', 'password');
     } catch (e) {
       setState(() {
         _errorMessage = 'Failed to sign in with $provider';
@@ -165,7 +169,8 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               elevation: 4,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 24.0, vertical: 32.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -198,7 +203,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         child: Text(
                           _errorMessage!,
-                          style: TextStyle(color: Colors.red[800], fontSize: 13),
+                          style:
+                              TextStyle(color: Colors.red[800], fontSize: 13),
                         ),
                       ),
                       const SizedBox(height: 16),
@@ -241,25 +247,33 @@ class _LoginScreenState extends State<LoginScreen> {
                               ElevatedButton(
                                 onPressed: _handleEmailSignIn,
                                 style: ElevatedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 16),
                                   backgroundColor: Colors.pinkAccent,
                                   foregroundColor: Colors.white,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                 ),
-                                child: const Text('Sign In', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                child: const Text('Sign In',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
                               ),
                               const SizedBox(height: 12),
                               OutlinedButton(
                                 onPressed: _handleSignUp,
                                 style: OutlinedButton.styleFrom(
-                                  padding: const EdgeInsets.symmetric(vertical: 16),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 16),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
                                   ),
                                 ),
-                                child: const Text('Sign Up', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                child: const Text('Sign Up',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
                               ),
                               TextButton(
                                 onPressed: _handlePasswordReset,
@@ -273,14 +287,18 @@ class _LoginScreenState extends State<LoginScreen> {
                         Expanded(child: Divider(color: Colors.grey[300])),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Text('OR', style: TextStyle(color: Colors.grey[500], fontSize: 12)),
+                          child: Text('OR',
+                              style: TextStyle(
+                                  color: Colors.grey[500], fontSize: 12)),
                         ),
                         Expanded(child: Divider(color: Colors.grey[300])),
                       ],
                     ),
                     const SizedBox(height: 24),
                     OutlinedButton.icon(
-                      onPressed: _isLoading ? null : () => _handleThirdPartySignIn('Google'),
+                      onPressed: _isLoading
+                          ? null
+                          : () => _handleThirdPartySignIn('Google'),
                       icon: const Icon(Icons.g_mobiledata, size: 28),
                       label: const Text('Sign In with Google'),
                       style: OutlinedButton.styleFrom(
@@ -292,7 +310,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 12),
                     OutlinedButton.icon(
-                      onPressed: _isLoading ? null : () => _handleThirdPartySignIn('Apple'),
+                      onPressed: _isLoading
+                          ? null
+                          : () => _handleThirdPartySignIn('Apple'),
                       icon: const Icon(Icons.apple),
                       label: const Text('Sign In with Apple'),
                       style: OutlinedButton.styleFrom(

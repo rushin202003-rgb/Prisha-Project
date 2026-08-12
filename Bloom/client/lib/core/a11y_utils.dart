@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// Reference: docs/UX-004_Accessibility_Spec.md
 class A11yUtils {
   // ─── WCAG 2.1 AA Contrast Ratio Constants ─────────────────────────────────
-  /// Minimum contrast ratio for normal text (WCAG AA). 
+  /// Minimum contrast ratio for normal text (WCAG AA).
   static const double wcagAaTextContrastRatio = 4.5;
 
   /// Minimum contrast ratio for large text (≥18pt or bold ≥14pt) (WCAG AA).

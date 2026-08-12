@@ -13,5 +13,6 @@ abstract class AIGateway {
   Future<Worksheet> generateWorksheet(String prompt);
 
   /// Requests the AI to propose schedule modifications based on a disruption.
-  Future<List<Schedule>> assistWithSchedule(String prompt, Schedule currentSchedule);
+  Future<List<Schedule>> assistWithSchedule(
+      String prompt, Schedule currentSchedule);
 }

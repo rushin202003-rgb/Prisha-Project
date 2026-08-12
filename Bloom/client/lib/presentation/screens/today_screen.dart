@@ -11,10 +11,10 @@ class TodayScreen extends StatefulWidget {
   final StudentRepository repository;
   final OfflineManager offlineManager;
   final AIGateway aiGateway;
-  
+
   const TodayScreen({
-    super.key, 
-    required this.repository, 
+    super.key,
+    required this.repository,
     required this.offlineManager,
     required this.aiGateway,
   });
@@ -38,10 +38,12 @@ class _TodayScreenState extends State<TodayScreen> {
           );
         }
       } else {
-        final generatedWorksheet = await widget.aiGateway.generateWorksheet(task.title);
+        final generatedWorksheet =
+            await widget.aiGateway.generateWorksheet(task.title);
         if (mounted) {
           Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => WorksheetScreen(worksheet: generatedWorksheet)),
+            MaterialPageRoute(
+                builder: (_) => WorksheetScreen(worksheet: generatedWorksheet)),
           );
         }
       }
@@ -84,17 +86,22 @@ class _TodayScreenState extends State<TodayScreen> {
           builder: (context, taskSnapshot) {
             final tasks = taskSnapshot.data ?? [];
             return Scaffold(
-              appBar: AppBar(title: Text('Today for ${profile?.displayName ?? ""} 🌸')),
+              appBar: AppBar(
+                  title: Text('Today for ${profile?.displayName ?? ""} 🌸')),
               body: Stack(
                 children: [
-                  tasks.isEmpty 
+                  tasks.isEmpty
                       ? Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text('Your day is still a blank page.', style: TextStyle(fontSize: 18)),
+                              const Text('Your day is still a blank page.',
+                                  style: TextStyle(fontSize: 18)),
                               const SizedBox(height: 16),
-                              ElevatedButton(onPressed: () {}, child: const Text('Want to plan it together? 🌸')),
+                              ElevatedButton(
+                                  onPressed: () {},
+                                  child: const Text(
+                                      'Want to plan it together? 🌸')),
                             ],
                           ),
                         )
@@ -103,15 +110,19 @@ class _TodayScreenState extends State<TodayScreen> {
                           itemBuilder: (context, index) {
                             final task = tasks[index];
                             return Card(
-                              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              margin: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
                               child: ListTile(
                                 leading: Checkbox(
                                   value: task.status == TaskStatus.completed,
                                   onChanged: (val) async {
                                     final updatedTask = task.copyWith(
-                                      status: val == true ? TaskStatus.completed : TaskStatus.planned,
+                                      status: val == true
+                                          ? TaskStatus.completed
+                                          : TaskStatus.planned,
                                     );
-                                    await widget.repository.updateTask(updatedTask);
+                                    await widget.repository
+                                        .updateTask(updatedTask);
                                     await widget.offlineManager.queueMutation(
                                       'UPDATE_TASK',
                                       '{"id": "${task.id}", "status": "${updatedTask.status.name}"}',
@@ -119,8 +130,10 @@ class _TodayScreenState extends State<TodayScreen> {
                                   },
                                 ),
                                 title: Text(task.title),
-                                subtitle: Text('${task.type.name} • ${task.priority.name} priority'),
-                                trailing: const Icon(Icons.play_arrow, color: Colors.pinkAccent),
+                                subtitle: Text(
+                                    '${task.type.name} • ${task.priority.name} priority'),
+                                trailing: const Icon(Icons.play_arrow,
+                                    color: Colors.pinkAccent),
                                 onTap: () => _startTask(task),
                               ),
                             );
@@ -138,7 +151,9 @@ class _TodayScreenState extends State<TodayScreen> {
                               children: [
                                 CircularProgressIndicator(),
                                 SizedBox(height: 16),
-                                Text('AI companion generating material...', style: TextStyle(fontWeight: FontWeight.bold)),
+                                Text('AI companion generating material...',
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold)),
                               ],
                             ),
                           ),

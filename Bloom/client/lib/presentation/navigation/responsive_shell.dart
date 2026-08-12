@@ -18,8 +18,8 @@ class ResponsiveShell extends StatefulWidget {
   final AuthService authService;
 
   const ResponsiveShell({
-    super.key, 
-    required this.repository, 
+    super.key,
+    required this.repository,
     required this.offlineManager,
     required this.aiGateway,
     required this.authService,
@@ -34,36 +34,51 @@ class _ResponsiveShellState extends State<ResponsiveShell> {
 
   late final List<Widget> _screens = [
     TodayScreen(
-      repository: widget.repository, 
+      repository: widget.repository,
       offlineManager: widget.offlineManager,
       aiGateway: widget.aiGateway,
     ),
     PlannerScreen(repository: widget.repository),
     LearnScreen(repository: widget.repository),
-    HobbiesScreen(repository: widget.repository, offlineManager: widget.offlineManager),
-    LifeScreen(repository: widget.repository, offlineManager: widget.offlineManager),
+    HobbiesScreen(
+        repository: widget.repository, offlineManager: widget.offlineManager),
+    LifeScreen(
+        repository: widget.repository, offlineManager: widget.offlineManager),
     ProgressScreen(repository: widget.repository),
-    SettingsScreen(repository: widget.repository, offlineManager: widget.offlineManager, authService: widget.authService),
+    SettingsScreen(
+        repository: widget.repository,
+        offlineManager: widget.offlineManager,
+        authService: widget.authService),
   ];
 
   final List<NavigationDestination> _destinations = const [
     NavigationDestination(icon: Icon(Icons.wb_sunny_outlined), label: 'Today'),
-    NavigationDestination(icon: Icon(Icons.calendar_month_outlined), label: 'Planner'),
+    NavigationDestination(
+        icon: Icon(Icons.calendar_month_outlined), label: 'Planner'),
     NavigationDestination(icon: Icon(Icons.school_outlined), label: 'Learn'),
     NavigationDestination(icon: Icon(Icons.palette_outlined), label: 'Hobbies'),
     NavigationDestination(icon: Icon(Icons.favorite_outline), label: 'Life'),
-    NavigationDestination(icon: Icon(Icons.emoji_events_outlined), label: 'Progress'),
-    NavigationDestination(icon: Icon(Icons.settings_outlined), label: 'Settings'),
+    NavigationDestination(
+        icon: Icon(Icons.emoji_events_outlined), label: 'Progress'),
+    NavigationDestination(
+        icon: Icon(Icons.settings_outlined), label: 'Settings'),
   ];
 
   final List<NavigationRailDestination> _railDestinations = const [
-    NavigationRailDestination(icon: Icon(Icons.wb_sunny_outlined), label: Text('Today')),
-    NavigationRailDestination(icon: Icon(Icons.calendar_month_outlined), label: Text('Planner')),
-    NavigationRailDestination(icon: Icon(Icons.school_outlined), label: Text('Learn')),
-    NavigationRailDestination(icon: Icon(Icons.palette_outlined), label: Text('Hobbies')),
-    NavigationRailDestination(icon: Icon(Icons.favorite_outline), label: Text('Life')),
-    NavigationRailDestination(icon: Icon(Icons.emoji_events_outlined), label: Text('Progress')),
-    NavigationRailDestination(icon: Icon(Icons.settings_outlined), label: Text('Settings')),
+    NavigationRailDestination(
+        icon: Icon(Icons.wb_sunny_outlined), label: Text('Today')),
+    NavigationRailDestination(
+        icon: Icon(Icons.calendar_month_outlined), label: Text('Planner')),
+    NavigationRailDestination(
+        icon: Icon(Icons.school_outlined), label: Text('Learn')),
+    NavigationRailDestination(
+        icon: Icon(Icons.palette_outlined), label: Text('Hobbies')),
+    NavigationRailDestination(
+        icon: Icon(Icons.favorite_outline), label: Text('Life')),
+    NavigationRailDestination(
+        icon: Icon(Icons.emoji_events_outlined), label: Text('Progress')),
+    NavigationRailDestination(
+        icon: Icon(Icons.settings_outlined), label: Text('Settings')),
   ];
 
   @override

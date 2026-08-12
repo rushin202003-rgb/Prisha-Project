@@ -43,7 +43,7 @@ void main() async {
   );
 
   final dir = await getApplicationDocumentsDirectory();
-  
+
   final isar = await Isar.open(
     [
       StudentProfileSchema,
@@ -72,14 +72,15 @@ void main() async {
   final repository = IsarStudentRepository(isar);
   final syncService = SupabaseSyncService(Supabase.instance.client);
   final offlineManager = OfflineManager(isar: isar, syncService: syncService);
-  
+
   final geminiApiKey = dotenv.env['GEMINI_API_KEY'] ?? '';
   final aiGateway = GeminiAIGateway(geminiApiKey);
-  
-  final AuthService authService = kDebugMode && dotenv.env['USE_MOCK_AUTH'] == 'true' 
-      ? MockAuthService() 
-      : SupabaseAuthService();
-  
+
+  final AuthService authService =
+      kDebugMode && dotenv.env['USE_MOCK_AUTH'] == 'true'
+          ? MockAuthService()
+          : SupabaseAuthService();
+
   final notificationService = LocalNotificationService();
   await notificationService.init();
   await notificationService.requestPermission();
@@ -103,7 +104,7 @@ void main() async {
       dueAt: DateTime.now().add(const Duration(hours: 2)),
       priority: TaskPriority.high,
     ));
-    
+
     await offlineManager.queueMutation('INIT', 'Initialized dummy data');
   }
 
@@ -120,9 +121,9 @@ class BloomApp extends StatelessWidget {
   final OfflineManager offlineManager;
   final AIGateway aiGateway;
   final AuthService authService;
-  
+
   const BloomApp({
-    super.key, 
+    super.key,
     required this.repository,
     required this.offlineManager,
     required this.aiGateway,

@@ -8,7 +8,8 @@ enum BlockType {
 class ScheduleBlock {
   final String id;
   final String scheduleId;
-  final String? taskId; // If null, it could be a break or hobby without a specific task
+  final String?
+      taskId; // If null, it could be a break or hobby without a specific task
   final DateTime startAt;
   final DateTime endAt;
   final BlockType blockType;

@@ -34,7 +34,7 @@ class OfflineManager extends ChangeNotifier {
     await isar.writeTxn(() async {
       await isar.syncMutations.put(mutation);
     });
-    
+
     if (!_isOffline) {
       await _processOfflineQueue();
     }
@@ -42,8 +42,9 @@ class OfflineManager extends ChangeNotifier {
 
   Future<void> _processOfflineQueue() async {
     // Read all queued mutations
-    final pendingMutations = await isar.syncMutations.where().sortByTimestamp().findAll();
-    
+    final pendingMutations =
+        await isar.syncMutations.where().sortByTimestamp().findAll();
+
     if (pendingMutations.isEmpty) return;
 
     for (var mutation in pendingMutations) {

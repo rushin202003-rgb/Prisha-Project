@@ -6,9 +6,9 @@ import '../../core/offline_manager.dart';
 class HobbiesScreen extends StatelessWidget {
   final StudentRepository repository;
   final OfflineManager offlineManager;
-  
+
   const HobbiesScreen({
-    super.key, 
+    super.key,
     required this.repository,
     required this.offlineManager,
   });
@@ -28,7 +28,8 @@ class HobbiesScreen extends StatelessWidget {
                 children: [
                   Icon(Icons.palette, size: 48, color: Colors.pinkAccent),
                   SizedBox(height: 16),
-                  Text('No hobbies added yet! Tap below to add one.', style: TextStyle(fontSize: 16)),
+                  Text('No hobbies added yet! Tap below to add one.',
+                      style: TextStyle(fontSize: 16)),
                 ],
               ),
             );
@@ -64,7 +65,8 @@ class HobbiesScreen extends StatelessWidget {
                 children: [
                   TextField(
                     controller: nameController,
-                    decoration: const InputDecoration(hintText: 'Hobby Name (e.g. Guitar)'),
+                    decoration: const InputDecoration(
+                        hintText: 'Hobby Name (e.g. Guitar)'),
                   ),
                   const SizedBox(height: 8),
                   TextField(

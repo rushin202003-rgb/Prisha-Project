@@ -8,7 +8,7 @@ class ParentDashboardScreen extends StatefulWidget {
   final StudentRepository repository;
   final OfflineManager offlineManager;
   final AuthService authService;
-  
+
   const ParentDashboardScreen({
     super.key,
     required this.repository,
@@ -55,7 +55,8 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
               children: [
                 const Icon(Icons.lock, size: 64, color: Colors.grey),
                 const SizedBox(height: 16),
-                const Text('Enter Parent PIN to unlock analytics and settings.'),
+                const Text(
+                    'Enter Parent PIN to unlock analytics and settings.'),
                 const SizedBox(height: 32),
                 TextField(
                   controller: _pinController,
@@ -71,9 +72,8 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
                 ElevatedButton(
                   onPressed: _verifyPin,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurpleAccent, 
-                    foregroundColor: Colors.white
-                  ),
+                      backgroundColor: Colors.deepPurpleAccent,
+                      foregroundColor: Colors.white),
                   child: const Text('Unlock'),
                 ),
               ],
@@ -93,36 +93,43 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
       body: StreamBuilder<ParentProfile?>(
         stream: widget.repository.watchParentProfile('p1'),
         builder: (context, snapshot) {
-          final profile = snapshot.data ?? const ParentProfile(
-            id: 'p1',
-            displayName: 'Parent',
-            email: 'parent@bloom.com',
-            notifyOnTaskCompletion: true,
-            notifyOnMoodDrop: true,
-            canViewJournal: false,
-          );
+          final profile = snapshot.data ??
+              ParentProfile(
+                id: 'p1',
+                displayName: 'Parent',
+                email: 'parent@bloom.com',
+                notifyOnTaskCompletion: true,
+                notifyOnMoodDrop: true,
+                canViewJournal: false,
+              );
 
           return ListView(
             padding: const EdgeInsets.all(16),
             children: [
-              const Text('Weekly Analytics', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text('Weekly Analytics',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 16),
               const Card(
                 child: ListTile(
                   leading: Icon(Icons.check_circle, color: Colors.green),
                   title: Text('Task Completion Rate'),
-                  trailing: Text('85%', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  trailing: Text('85%',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ),
               const Card(
                 child: ListTile(
                   leading: Icon(Icons.timer, color: Colors.orange),
                   title: Text('Average Daily Study Time'),
-                  trailing: Text('1h 15m', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  trailing: Text('1h 15m',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 ),
               ),
               const SizedBox(height: 32),
-              const Text('Settings & Controls', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+              const Text('Settings & Controls',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               const SizedBox(height: 16),
               SwitchListTile(
                 title: const Text('Notify on Task Completion'),
@@ -189,13 +196,15 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
               ),
               ListTile(
                 leading: const Icon(Icons.delete, color: Colors.red),
-                title: const Text('Delete Account', style: TextStyle(color: Colors.red)),
+                title: const Text('Delete Account',
+                    style: TextStyle(color: Colors.red)),
                 onTap: () {
                   final deleteConfirmController = TextEditingController();
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
-                      title: const Text('Confirm Account Deletion ⚠️', style: TextStyle(color: Colors.red)),
+                      title: const Text('Confirm Account Deletion ⚠️',
+                          style: TextStyle(color: Colors.red)),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -204,7 +213,8 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
                             'Warning: Deleting your account will scrub all child study planners, moods, journals, and dashboard settings forever to comply with COPPA and GDPR. This cannot be undone.',
                           ),
                           const SizedBox(height: 16),
-                          const Text('Please type "DELETE" in all caps below to confirm:'),
+                          const Text(
+                              'Please type "DELETE" in all caps below to confirm:'),
                           const SizedBox(height: 8),
                           TextField(
                             controller: deleteConfirmController,
@@ -223,30 +233,38 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
                         TextButton(
                           onPressed: () async {
                             if (deleteConfirmController.text == 'DELETE') {
-                              Navigator.of(context).pop(); // Dismiss confirmation dialog
+                              Navigator.of(context)
+                                  .pop(); // Dismiss confirmation dialog
                               showDialog(
                                 context: context,
                                 barrierDismissible: false,
-                                builder: (_) => const Center(child: CircularProgressIndicator()),
+                                builder: (_) => const Center(
+                                    child: CircularProgressIndicator()),
                               );
-                              
+
                               await widget.repository.clearAllUserData();
                               await widget.authService.deleteAccount();
-                              
+
                               if (mounted) {
                                 Navigator.of(context).pop(); // Dismiss spinner
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Account and all cached child data scrubbed safely.')),
+                                  const SnackBar(
+                                      content: Text(
+                                          'Account and all cached child data scrubbed safely.')),
                                 );
-                                Navigator.of(context).popUntil((route) => route.isFirst);
+                                Navigator.of(context)
+                                    .popUntil((route) => route.isFirst);
                               }
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Input does not match "DELETE".')),
+                                const SnackBar(
+                                    content:
+                                        Text('Input does not match "DELETE".')),
                               );
                             }
                           },
-                          child: const Text('Scrub & Delete', style: TextStyle(color: Colors.red)),
+                          child: const Text('Scrub & Delete',
+                              style: TextStyle(color: Colors.red)),
                         ),
                       ],
                     ),

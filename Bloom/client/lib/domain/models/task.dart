@@ -32,20 +32,20 @@ class Task {
 
   @Index(unique: true)
   final String id;
-  
+
   final String studentId;
   final String? subjectId;
-  
+
   @enumerated
   final TaskType type;
-  
+
   final String title;
   final DateTime? dueAt;
   final int estimatedMinutes;
-  
+
   @enumerated
   final TaskPriority priority;
-  
+
   @enumerated
   final TaskStatus status;
 

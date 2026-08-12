@@ -8,11 +8,11 @@ class ParentProfile {
 
   @Index(unique: true)
   final String id;
-  
+
   final String displayName;
   final String email;
   final List<String> linkedStudentIds;
-  
+
   // Notification Preferences
   final bool notifyOnTaskCompletion;
   final bool notifyOnMoodDrop;
@@ -20,7 +20,7 @@ class ParentProfile {
   // Privacy Boundaries
   final bool canViewJournal;
 
-  const ParentProfile({
+  ParentProfile({
     required this.id,
     required this.displayName,
     required this.email,

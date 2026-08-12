@@ -16,7 +16,8 @@ class MockAIGateway implements AIGateway {
 
   @override
   Future<Quiz> generateQuiz(String prompt) async {
-    await Future.delayed(const Duration(milliseconds: 1500)); // Simulate LLM delay
+    await Future.delayed(
+        const Duration(milliseconds: 1500)); // Simulate LLM delay
     return Quiz(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: 'Quiz: $prompt',
@@ -25,14 +26,25 @@ class MockAIGateway implements AIGateway {
         QuizQuestion(
           id: 'q1',
           questionText: 'What is the primary objective when studying $prompt?',
-          options: ['Memorization', 'Understanding core concepts', 'Fast execution', 'Skipping hard parts'],
+          options: [
+            'Memorization',
+            'Understanding core concepts',
+            'Fast execution',
+            'Skipping hard parts'
+          ],
           correctOptionIndex: 1,
-          explanation: 'Understanding the underlying concepts helps apply them to new challenges.',
+          explanation:
+              'Understanding the underlying concepts helps apply them to new challenges.',
         ),
         QuizQuestion(
           id: 'q2',
           questionText: 'Which tool is most helpful when analyzing $prompt?',
-          options: ['Text Editor', 'Doubt solver', 'Calculator', 'Structured planning'],
+          options: [
+            'Text Editor',
+            'Doubt solver',
+            'Calculator',
+            'Structured planning'
+          ],
           correctOptionIndex: 3,
           explanation: 'Structured planning organizes thoughts step-by-step.',
         ),
@@ -42,7 +54,8 @@ class MockAIGateway implements AIGateway {
 
   @override
   Future<Worksheet> generateWorksheet(String prompt) async {
-    await Future.delayed(const Duration(milliseconds: 1500)); // Simulate LLM delay
+    await Future.delayed(
+        const Duration(milliseconds: 1500)); // Simulate LLM delay
     return Worksheet(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
       title: 'Worksheet: $prompt',
@@ -63,7 +76,8 @@ class MockAIGateway implements AIGateway {
   }
 
   @override
-  Future<List<Schedule>> assistWithSchedule(String prompt, Schedule currentSchedule) async {
+  Future<List<Schedule>> assistWithSchedule(
+      String prompt, Schedule currentSchedule) async {
     await Future.delayed(const Duration(milliseconds: 1000));
     return [currentSchedule];
   }

@@ -15,13 +15,13 @@ class Subject {
 
   @Index(unique: true)
   final String id;
-  
+
   final String studentId;
   final String name;
   final String colorHex;
   final bool active;
 
-  const Subject({
+  Subject({
     required this.id,
     required this.studentId,
     required this.name,
@@ -36,16 +36,16 @@ class SyllabusItem {
 
   @Index(unique: true)
   final String id;
-  
+
   final String subjectId;
   final String title;
-  
+
   @enumerated
   final SyllabusStatus status;
-  
+
   final int estimatedMinutes;
 
-  const SyllabusItem({
+  SyllabusItem({
     required this.id,
     required this.subjectId,
     required this.title,

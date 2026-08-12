@@ -25,12 +25,12 @@ class Quiz {
 
   @Index(unique: true)
   final String id;
-  
+
   final String title;
   final String subjectId;
   final List<QuizQuestion> questions;
 
-  const Quiz({
+  Quiz({
     required this.id,
     required this.title,
     required this.subjectId,

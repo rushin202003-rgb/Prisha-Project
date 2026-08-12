@@ -16,16 +16,16 @@ class MoodEntry {
 
   @Index(unique: true)
   final String id;
-  
+
   final String studentId;
   final DateTime timestamp;
-  
+
   @enumerated
   final MoodValue mood;
-  
+
   final String? note;
 
-  const MoodEntry({
+  MoodEntry({
     required this.id,
     required this.studentId,
     required this.timestamp,
@@ -40,12 +40,12 @@ class JournalEntry {
 
   @Index(unique: true)
   final String id;
-  
+
   final String studentId;
   final DateTime date;
   final String content;
 
-  const JournalEntry({
+  JournalEntry({
     required this.id,
     required this.studentId,
     required this.date,

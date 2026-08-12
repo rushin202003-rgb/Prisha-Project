@@ -17,13 +17,14 @@ class _AiChatScreenState extends State<AiChatScreen> {
     super.initState();
     _messages.add({
       'role': 'ai',
-      'text': 'Hi! I am ready to help you with ${widget.subjectName}. What would you like to explore today? 🌸'
+      'text':
+          'Hi! I am ready to help you with ${widget.subjectName}. What would you like to explore today? 🌸'
     });
   }
 
   void _sendMessage() {
     if (_controller.text.isEmpty) return;
-    
+
     setState(() {
       _messages.add({'role': 'user', 'text': _controller.text});
       _controller.clear();
@@ -33,7 +34,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
           setState(() {
             _messages.add({
               'role': 'ai',
-              'text': 'That is a great question! Let us break it down together. What do you think the first step is?' // Socratic nudge!
+              'text':
+                  'That is a great question! Let us break it down together. What do you think the first step is?' // Socratic nudge!
             });
           });
         }
@@ -58,7 +60,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
             tooltip: 'Give me a hint',
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Hint requested! Check the chat. 💡')),
+                const SnackBar(
+                    content: Text('Hint requested! Check the chat. 💡')),
               );
             },
           )
@@ -73,20 +76,26 @@ class _AiChatScreenState extends State<AiChatScreen> {
               itemBuilder: (context, index) {
                 final isUser = _messages[index]['role'] == 'user';
                 return Align(
-                  alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment:
+                      isUser ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 12),
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: isUser ? Colors.pinkAccent : Colors.grey[200],
                       borderRadius: BorderRadius.circular(16).copyWith(
-                        bottomRight: isUser ? const Radius.circular(0) : const Radius.circular(16),
-                        bottomLeft: isUser ? const Radius.circular(16) : const Radius.circular(0),
+                        bottomRight: isUser
+                            ? const Radius.circular(0)
+                            : const Radius.circular(16),
+                        bottomLeft: isUser
+                            ? const Radius.circular(16)
+                            : const Radius.circular(0),
                       ),
                     ),
                     child: Text(
                       _messages[index]['text']!,
-                      style: TextStyle(color: isUser ? Colors.white : Colors.black87),
+                      style: TextStyle(
+                          color: isUser ? Colors.white : Colors.black87),
                     ),
                   ),
                 );
@@ -96,7 +105,10 @@ class _AiChatScreenState extends State<AiChatScreen> {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(color: Colors.white, boxShadow: [
-              BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -5))
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 10,
+                  offset: const Offset(0, -5))
             ]),
             child: SafeArea(
               child: Row(
@@ -112,7 +124,8 @@ class _AiChatScreenState extends State<AiChatScreen> {
                         ),
                         filled: true,
                         fillColor: Colors.grey[100],
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 10),
                       ),
                       onSubmitted: (_) => _sendMessage(),
                     ),

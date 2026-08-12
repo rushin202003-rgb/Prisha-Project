@@ -21,11 +21,13 @@ class ProgressScreen extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Icon(Icons.emoji_events, size: 64, color: Colors.orangeAccent),
+                    const Icon(Icons.emoji_events,
+                        size: 64, color: Colors.orangeAccent),
                     const SizedBox(height: 16),
                     const Text(
                       'No achievements unlocked yet!',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -51,9 +53,11 @@ class ProgressScreen extends StatelessWidget {
                     backgroundColor: Colors.amberAccent,
                     child: Icon(Icons.emoji_events, color: Colors.brown),
                   ),
-                  title: Text(achievement.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  title: Text(achievement.title,
+                      style: const TextStyle(fontWeight: FontWeight.bold)),
                   subtitle: Text(achievement.description),
-                  trailing: Text(achievement.dateUnlocked.toString().split(" ")[0]),
+                  trailing:
+                      Text(achievement.dateUnlocked.toString().split(" ")[0]),
                 ),
               );
             },

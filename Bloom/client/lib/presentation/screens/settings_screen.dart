@@ -9,8 +9,8 @@ class SettingsScreen extends StatelessWidget {
   final OfflineManager offlineManager;
   final AuthService authService;
   const SettingsScreen({
-    super.key, 
-    required this.repository, 
+    super.key,
+    required this.repository,
     required this.offlineManager,
     required this.authService,
   });
@@ -21,12 +21,17 @@ class SettingsScreen extends StatelessWidget {
       appBar: AppBar(title: const Text('Settings')),
       body: ListView(
         children: [
-          const ListTile(leading: Icon(Icons.person), title: Text('Student Profile')),
-          const ListTile(leading: Icon(Icons.smart_toy), title: Text('AI Companion Configuration')),
-          const ListTile(leading: Icon(Icons.notifications), title: Text('Notifications')),
+          const ListTile(
+              leading: Icon(Icons.person), title: Text('Student Profile')),
+          const ListTile(
+              leading: Icon(Icons.smart_toy),
+              title: Text('AI Companion Configuration')),
+          const ListTile(
+              leading: Icon(Icons.notifications), title: Text('Notifications')),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.admin_panel_settings, color: Colors.deepPurple),
+            leading: const Icon(Icons.admin_panel_settings,
+                color: Colors.deepPurple),
             title: const Text('Parent Gateway'),
             subtitle: const Text('Locked with PIN'),
             trailing: const Icon(Icons.lock),

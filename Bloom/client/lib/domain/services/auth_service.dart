@@ -6,7 +6,7 @@ abstract class AuthService {
   Future<void> signOut();
   Future<void> signOutAllDevices();
   Future<void> deleteAccount();
-  
+
   // Exposes a stream of the user ID (null if signed out)
   Stream<String?> get authStateChanges;
 }

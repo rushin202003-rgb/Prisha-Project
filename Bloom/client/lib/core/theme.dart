@@ -5,7 +5,8 @@ class BloomTheme {
   static const Color lavender = Color(0xFF7C4DFF); // Secondary Accent
   static const Color mint = Color(0xFF98FF98); // Semantic Success
   static const Color softOrange = Color(0xFFFFB74D); // Semantic Warning
-  static const Color softBackground = Color(0xFFFCE4EC); // Colors.pink[50] equivalent
+  static const Color softBackground =
+      Color(0xFFFCE4EC); // Colors.pink[50] equivalent
   static const Color textColor = Color(0xFF2C3E50);
 
   static ThemeData get lightTheme {
@@ -25,10 +26,10 @@ class BloomTheme {
         bodyLarge: TextStyle(color: textColor),
         bodyMedium: TextStyle(color: textColor),
       ),
-      cardTheme: CardTheme(
+      cardTheme: const CardThemeData(
         elevation: 2,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         color: Colors.white,
       ),

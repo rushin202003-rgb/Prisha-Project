@@ -17,7 +17,8 @@ class MockAuthService implements AuthService {
 
   @override
   Future<void> signInWithEmail(String email, String password) async {
-    await Future.delayed(const Duration(milliseconds: 600)); // Simulate API latency
+    await Future.delayed(
+        const Duration(milliseconds: 600)); // Simulate API latency
     _currentUserId = '1'; // Log in as test student '1'
     _authStateController.add(_currentUserId);
   }

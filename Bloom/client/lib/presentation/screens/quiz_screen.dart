@@ -16,8 +16,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
   void _submitAnswer() {
     if (_selectedOptionIndex == null) return;
-    
-    if (_selectedOptionIndex == widget.quiz.questions[_currentIndex].correctOptionIndex) {
+
+    if (_selectedOptionIndex ==
+        widget.quiz.questions[_currentIndex].correctOptionIndex) {
       _score++;
     }
 
@@ -37,7 +38,8 @@ class _QuizScreenState extends State<QuizScreen> {
       barrierDismissible: false,
       builder: (context) => AlertDialog(
         title: const Text('Quiz Complete! 🎉'),
-        content: Text('You scored $_score out of ${widget.quiz.questions.length}!'),
+        content:
+            Text('You scored $_score out of ${widget.quiz.questions.length}!'),
         actions: [
           TextButton(
             onPressed: () {
@@ -53,7 +55,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.quiz.questions.isEmpty) return const Scaffold(body: Center(child: Text('No questions available')));
+    if (widget.quiz.questions.isEmpty)
+      return const Scaffold(
+          body: Center(child: Text('No questions available')));
 
     final question = widget.quiz.questions[_currentIndex];
 
@@ -121,7 +125,9 @@ class _QuizScreenState extends State<QuizScreen> {
                 backgroundColor: Colors.pinkAccent,
                 foregroundColor: Colors.white,
               ),
-              child: Text(_currentIndex == widget.quiz.questions.length - 1 ? 'Finish' : 'Next Question'),
+              child: Text(_currentIndex == widget.quiz.questions.length - 1
+                  ? 'Finish'
+                  : 'Next Question'),
             ),
           ],
         ),

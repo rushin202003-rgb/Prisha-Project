@@ -13,13 +13,13 @@ class CompanionConfig {
 
   @Index(unique: true)
   final String studentId;
-  
+
   @enumerated
   final CompanionMode mode;
-  
+
   final String? customInstructions;
 
-  const CompanionConfig({
+  CompanionConfig({
     required this.studentId,
     this.mode = CompanionMode.teacher,
     this.customInstructions,

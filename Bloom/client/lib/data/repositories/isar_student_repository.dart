@@ -15,13 +15,19 @@ class IsarStudentRepository implements StudentRepository {
 
   @override
   Future<StudentProfile?> getProfile(String userId) async {
-    return await isar.studentProfiles.filter().userIdEqualTo(userId).findFirst();
+    return await isar.studentProfiles
+        .filter()
+        .userIdEqualTo(userId)
+        .findFirst();
   }
 
   @override
   Future<void> saveProfile(StudentProfile profile) async {
     await isar.writeTxn(() async {
-      final existing = await isar.studentProfiles.filter().userIdEqualTo(profile.userId).findFirst();
+      final existing = await isar.studentProfiles
+          .filter()
+          .userIdEqualTo(profile.userId)
+          .findFirst();
       if (existing != null) {
         profile.isarId = existing.isarId;
       }
@@ -37,7 +43,8 @@ class IsarStudentRepository implements StudentRepository {
   @override
   Future<void> addSubject(Subject subject) async {
     await isar.writeTxn(() async {
-      final existing = await isar.subjects.filter().idEqualTo(subject.id).findFirst();
+      final existing =
+          await isar.subjects.filter().idEqualTo(subject.id).findFirst();
       if (existing != null) {
         subject.isarId = existing.isarId;
       }
@@ -47,13 +54,17 @@ class IsarStudentRepository implements StudentRepository {
 
   @override
   Future<List<SyllabusItem>> getSyllabus(String subjectId) async {
-    return await isar.syllabusItems.filter().subjectIdEqualTo(subjectId).findAll();
+    return await isar.syllabusItems
+        .filter()
+        .subjectIdEqualTo(subjectId)
+        .findAll();
   }
 
   @override
   Future<void> addSyllabusItem(SyllabusItem item) async {
     await isar.writeTxn(() async {
-      final existing = await isar.syllabusItems.filter().idEqualTo(item.id).findFirst();
+      final existing =
+          await isar.syllabusItems.filter().idEqualTo(item.id).findFirst();
       if (existing != null) {
         item.isarId = existing.isarId;
       }
@@ -64,7 +75,8 @@ class IsarStudentRepository implements StudentRepository {
   @override
   Future<void> updateSyllabusItem(SyllabusItem item) async {
     await isar.writeTxn(() async {
-      final existing = await isar.syllabusItems.filter().idEqualTo(item.id).findFirst();
+      final existing =
+          await isar.syllabusItems.filter().idEqualTo(item.id).findFirst();
       if (existing != null) {
         item.isarId = existing.isarId;
       }
@@ -75,13 +87,13 @@ class IsarStudentRepository implements StudentRepository {
   @override
   Future<List<Task>> getTasks(String userId, {DateTime? date}) async {
     var query = isar.tasks.filter().studentIdEqualTo(userId);
-    
+
     if (date != null) {
       final start = DateTime(date.year, date.month, date.day);
       final end = start.add(const Duration(days: 1));
       query = query.dueAtBetween(start, end);
     }
-    
+
     return await query.findAll();
   }
 
@@ -138,7 +150,8 @@ class IsarStudentRepository implements StudentRepository {
   @override
   Future<void> addHobby(Hobby hobby) async {
     await isar.writeTxn(() async {
-      final existing = await isar.hobbys.filter().idEqualTo(hobby.id).findFirst();
+      final existing =
+          await isar.hobbys.filter().idEqualTo(hobby.id).findFirst();
       if (existing != null) {
         hobby.isarId = existing.isarId;
       }
@@ -154,7 +167,8 @@ class IsarStudentRepository implements StudentRepository {
   @override
   Future<void> logHobbySession(HobbySession session) async {
     await isar.writeTxn(() async {
-      final existing = await isar.hobbySessions.filter().idEqualTo(session.id).findFirst();
+      final existing =
+          await isar.hobbySessions.filter().idEqualTo(session.id).findFirst();
       if (existing != null) {
         session.isarId = existing.isarId;
       }
@@ -167,7 +181,8 @@ class IsarStudentRepository implements StudentRepository {
   @override
   Future<void> addJournalEntry(JournalEntry entry) async {
     await isar.writeTxn(() async {
-      final existing = await isar.journalEntrys.filter().idEqualTo(entry.id).findFirst();
+      final existing =
+          await isar.journalEntrys.filter().idEqualTo(entry.id).findFirst();
       if (existing != null) {
         entry.isarId = existing.isarId;
       }
@@ -178,7 +193,8 @@ class IsarStudentRepository implements StudentRepository {
   @override
   Future<void> addMoodEntry(MoodEntry entry) async {
     await isar.writeTxn(() async {
-      final existing = await isar.moodEntrys.filter().idEqualTo(entry.id).findFirst();
+      final existing =
+          await isar.moodEntrys.filter().idEqualTo(entry.id).findFirst();
       if (existing != null) {
         entry.isarId = existing.isarId;
       }
@@ -196,7 +212,8 @@ class IsarStudentRepository implements StudentRepository {
   @override
   Future<void> saveParentProfile(ParentProfile profile) async {
     await isar.writeTxn(() async {
-      final existing = await isar.parentProfiles.filter().idEqualTo(profile.id).findFirst();
+      final existing =
+          await isar.parentProfiles.filter().idEqualTo(profile.id).findFirst();
       if (existing != null) {
         profile.isarId = existing.isarId;
       }
@@ -209,39 +226,60 @@ class IsarStudentRepository implements StudentRepository {
   @override
   Stream<List<Task>> watchTasks(String userId, {DateTime? date}) {
     var query = isar.tasks.filter().studentIdEqualTo(userId);
-    
+
     if (date != null) {
       final start = DateTime(date.year, date.month, date.day);
       final end = start.add(const Duration(days: 1));
       query = query.dueAtBetween(start, end);
     }
-    
+
     return query.build().watch(fireImmediately: true);
   }
 
   @override
   Stream<List<Goal>> watchGoals(String userId) {
-    return isar.goals.filter().studentIdEqualTo(userId).build().watch(fireImmediately: true);
+    return isar.goals
+        .filter()
+        .studentIdEqualTo(userId)
+        .build()
+        .watch(fireImmediately: true);
   }
 
   @override
   Stream<List<Achievement>> watchAchievements(String userId) {
-    return isar.achievements.filter().studentIdEqualTo(userId).build().watch(fireImmediately: true);
+    return isar.achievements
+        .filter()
+        .studentIdEqualTo(userId)
+        .build()
+        .watch(fireImmediately: true);
   }
 
   @override
   Stream<List<Hobby>> watchHobbies(String userId) {
-    return isar.hobbys.filter().studentIdEqualTo(userId).build().watch(fireImmediately: true);
+    return isar.hobbys
+        .filter()
+        .studentIdEqualTo(userId)
+        .build()
+        .watch(fireImmediately: true);
   }
 
   @override
   Stream<List<JournalEntry>> watchJournalEntries(String userId) {
-    return isar.journalEntrys.filter().studentIdEqualTo(userId).build().watch(fireImmediately: true);
+    return isar.journalEntrys
+        .filter()
+        .studentIdEqualTo(userId)
+        .build()
+        .watch(fireImmediately: true);
   }
 
   @override
   Stream<ParentProfile?> watchParentProfile(String id) {
-    return isar.parentProfiles.filter().idEqualTo(id).build().watch(fireImmediately: true).map((list) => list.isNotEmpty ? list.first : null);
+    return isar.parentProfiles
+        .filter()
+        .idEqualTo(id)
+        .build()
+        .watch(fireImmediately: true)
+        .map((list) => list.isNotEmpty ? list.first : null);
   }
 
   @override

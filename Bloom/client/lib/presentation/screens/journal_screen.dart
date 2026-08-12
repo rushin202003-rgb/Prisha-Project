@@ -6,7 +6,7 @@ import '../../core/offline_manager.dart';
 class JournalScreen extends StatefulWidget {
   final StudentRepository repository;
   final OfflineManager offlineManager;
-  
+
   const JournalScreen({
     super.key,
     required this.repository,
@@ -31,7 +31,7 @@ class _JournalScreenState extends State<JournalScreen> {
       date: DateTime.now(),
       content: _controller.text,
     );
-    
+
     final mood = MoodEntry(
       id: entryId,
       studentId: '1',
@@ -91,11 +91,21 @@ class _JournalScreenState extends State<JournalScreen> {
                 final isSelected = _selectedMood == mood;
                 String emoji = '😐';
                 switch (mood) {
-                  case MoodValue.great: emoji = '😊'; break;
-                  case MoodValue.good: emoji = '😌'; break;
-                  case MoodValue.okay: emoji = '😐'; break;
-                  case MoodValue.bad: emoji = '😟'; break;
-                  case MoodValue.terrible: emoji = '😢'; break;
+                  case MoodValue.great:
+                    emoji = '😊';
+                    break;
+                  case MoodValue.good:
+                    emoji = '😌';
+                    break;
+                  case MoodValue.okay:
+                    emoji = '😐';
+                    break;
+                  case MoodValue.bad:
+                    emoji = '😟';
+                    break;
+                  case MoodValue.terrible:
+                    emoji = '😢';
+                    break;
                 }
                 return GestureDetector(
                   onTap: () => setState(() => _selectedMood = mood),

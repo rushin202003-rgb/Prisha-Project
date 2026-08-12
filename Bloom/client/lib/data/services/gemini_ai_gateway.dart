@@ -35,13 +35,27 @@ class GeminiAIGateway implements AIGateway {
               'questions': Schema.array(
                 items: Schema.object(
                   properties: {
-                    'id': Schema.string(description: 'Unique question ID, e.g., q1, q2'),
-                    'questionText': Schema.string(description: 'The multiple choice question text'),
-                    'options': Schema.array(items: Schema.string(description: 'A single answer option')),
-                    'correctOptionIndex': Schema.integer(description: '0-based index of the correct option in the options array'),
-                    'explanation': Schema.string(description: 'Clear step-by-step academic explanation of the correct answer'),
+                    'id': Schema.string(
+                        description: 'Unique question ID, e.g., q1, q2'),
+                    'questionText': Schema.string(
+                        description: 'The multiple choice question text'),
+                    'options': Schema.array(
+                        items: Schema.string(
+                            description: 'A single answer option')),
+                    'correctOptionIndex': Schema.integer(
+                        description:
+                            '0-based index of the correct option in the options array'),
+                    'explanation': Schema.string(
+                        description:
+                            'Clear step-by-step academic explanation of the correct answer'),
                   },
-                  requiredProperties: ['id', 'questionText', 'options', 'correctOptionIndex', 'explanation'],
+                  requiredProperties: [
+                    'id',
+                    'questionText',
+                    'options',
+                    'correctOptionIndex',
+                    'explanation'
+                  ],
                 ),
               ),
             },
@@ -57,13 +71,15 @@ class GeminiAIGateway implements AIGateway {
       }
 
       final map = jsonDecode(jsonText) as Map<String, dynamic>;
-      final questionsList = (map['questions'] as List).map((q) => QuizQuestion(
-        id: q['id']?.toString(),
-        questionText: q['questionText']?.toString(),
-        options: List<String>.from(q['options'] ?? []),
-        correctOptionIndex: q['correctOptionIndex'] as int?,
-        explanation: q['explanation']?.toString(),
-      )).toList();
+      final questionsList = (map['questions'] as List)
+          .map((q) => QuizQuestion(
+                id: q['id']?.toString(),
+                questionText: q['questionText']?.toString(),
+                options: List<String>.from(q['options'] ?? []),
+                correctOptionIndex: q['correctOptionIndex'] as int?,
+                explanation: q['explanation']?.toString(),
+              ))
+          .toList();
 
       return Quiz(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -80,10 +96,12 @@ class GeminiAIGateway implements AIGateway {
         questions: [
           QuizQuestion(
             id: 'fq1',
-            questionText: 'Which of the following describes the core theme of your study session?',
+            questionText:
+                'Which of the following describes the core theme of your study session?',
             options: ['Revision', 'Recall', 'Analysis', 'All of the above'],
             correctOptionIndex: 3,
-            explanation: 'All of these methods contribute to active retrieval and understanding.',
+            explanation:
+                'All of these methods contribute to active retrieval and understanding.',
           )
         ],
       );
@@ -104,9 +122,14 @@ class GeminiAIGateway implements AIGateway {
               'problems': Schema.array(
                 items: Schema.object(
                   properties: {
-                    'id': Schema.string(description: 'Unique problem ID, e.g., p1, p2'),
-                    'problemText': Schema.string(description: 'The worksheet question or math problem text'),
-                    'hint': Schema.string(description: 'A helpful hint to guide the student towards solving it'),
+                    'id': Schema.string(
+                        description: 'Unique problem ID, e.g., p1, p2'),
+                    'problemText': Schema.string(
+                        description:
+                            'The worksheet question or math problem text'),
+                    'hint': Schema.string(
+                        description:
+                            'A helpful hint to guide the student towards solving it'),
                   },
                   requiredProperties: ['id', 'problemText', 'hint'],
                 ),
@@ -124,11 +147,13 @@ class GeminiAIGateway implements AIGateway {
       }
 
       final map = jsonDecode(jsonText) as Map<String, dynamic>;
-      final problemsList = (map['problems'] as List).map((p) => WorksheetProblem(
-        id: p['id']?.toString(),
-        problemText: p['problemText']?.toString(),
-        hint: p['hint']?.toString(),
-      )).toList();
+      final problemsList = (map['problems'] as List)
+          .map((p) => WorksheetProblem(
+                id: p['id']?.toString(),
+                problemText: p['problemText']?.toString(),
+                hint: p['hint']?.toString(),
+              ))
+          .toList();
 
       return Worksheet(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
@@ -145,7 +170,8 @@ class GeminiAIGateway implements AIGateway {
         problems: [
           WorksheetProblem(
             id: 'fp1',
-            problemText: 'Explain in your own words the most important concepts of this topic.',
+            problemText:
+                'Explain in your own words the most important concepts of this topic.',
             hint: 'Recall details step-by-step.',
           )
         ],
@@ -154,7 +180,8 @@ class GeminiAIGateway implements AIGateway {
   }
 
   @override
-  Future<List<Schedule>> assistWithSchedule(String prompt, Schedule currentSchedule) async {
+  Future<List<Schedule>> assistWithSchedule(
+      String prompt, Schedule currentSchedule) async {
     // Basic schedule shifting fallback, similar to the mock gateway
     return [
       Schedule(

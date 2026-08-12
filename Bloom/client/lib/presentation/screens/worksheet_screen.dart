@@ -55,13 +55,16 @@ class _WorksheetScreenState extends State<WorksheetScreen> {
                       CircleAvatar(
                         radius: 12,
                         backgroundColor: Colors.deepPurple[100],
-                        child: Text('${index + 1}', style: const TextStyle(fontSize: 12, color: Colors.deepPurple)),
+                        child: Text('${index + 1}',
+                            style: const TextStyle(
+                                fontSize: 12, color: Colors.deepPurple)),
                       ),
                       const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           problem.problemText ?? '',
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -76,9 +79,12 @@ class _WorksheetScreenState extends State<WorksheetScreen> {
                       ),
                       child: Row(
                         children: [
-                          const Icon(Icons.lightbulb_outline, size: 16, color: Colors.orange),
+                          const Icon(Icons.lightbulb_outline,
+                              size: 16, color: Colors.orange),
                           const SizedBox(width: 8),
-                          Expanded(child: Text(problem.hint!, style: const TextStyle(fontSize: 12))),
+                          Expanded(
+                              child: Text(problem.hint!,
+                                  style: const TextStyle(fontSize: 12))),
                         ],
                       ),
                     ),

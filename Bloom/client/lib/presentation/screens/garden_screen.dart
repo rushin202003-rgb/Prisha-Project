@@ -28,7 +28,9 @@ class _GardenScreenState extends State<GardenScreen> {
           children: _themeGradients.keys.map((themeName) {
             return ListTile(
               title: Text(themeName),
-              trailing: _currentTheme == themeName ? const Icon(Icons.check, color: Colors.pinkAccent) : null,
+              trailing: _currentTheme == themeName
+                  ? const Icon(Icons.check, color: Colors.pinkAccent)
+                  : null,
               onTap: () {
                 setState(() {
                   _currentTheme = themeName;
@@ -84,10 +86,8 @@ class _GardenScreenState extends State<GardenScreen> {
             Positioned(
               top: 150,
               left: 100,
-              child: Text(
-                _currentTheme == 'Winter' ? '❄️' : '🦋', 
-                style: const TextStyle(fontSize: 40)
-              ),
+              child: Text(_currentTheme == 'Winter' ? '❄️' : '🦋',
+                  style: const TextStyle(fontSize: 40)),
             ),
             Align(
               alignment: Alignment.topCenter,
@@ -102,7 +102,10 @@ class _GardenScreenState extends State<GardenScreen> {
                   child: const Text(
                     'Your garden is blooming beautifully! Keep completing tasks to plant more flowers.',
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.teal),
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.teal),
                   ),
                 ),
               ),

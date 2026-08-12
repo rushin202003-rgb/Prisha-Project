@@ -2,46 +2,40 @@
 
 ## Phase A0 — Build Health / Baseline Stabilization
 **Date:** 2026-08-12  
-**Status:** COMPLETE
-
-### 1. Baseline Analyzer Summary & Root Cause Analysis
-- **Baseline Analyzer Count:** 285 issues found (with multiple fatal compilation errors).
-- **A1-Caused vs Pre-Existing Errors:**
-  - **A1-Caused Errors:** **0**. None of the compilation errors were introduced by the Phase A1 authentication migration.
-  - **Pre-Existing Errors:** **7 fatal compilation errors** caused by model definition mismatches and null-safety discrepancies in legacy code:
-    1. `worksheet.dart`: Invalid `const` constructor on Isar `@collection` class initializing a non-const `isarId` field (`const_constructor_with_field_initialized_by_non_const`).
-    2. `task.dart`: Invalid `const` constructor on Isar `@collection` class (`const_constructor_with_non_final_field`).
-    3. `subject.dart`: Missing `colorHex` property required downstream by `learn_screen.dart`.
-    4. `worksheet_screen.dart`: Null-safety type assignment errors (`String?` to `String`) for `problemText` and `problem.id` map key.
-    5. `quiz_screen.dart`: Null-safety access errors on nullable `QuizQuestion.questionText` and `QuizQuestion.options`.
-
-### 2. Files Changed & Fix Justification
-- `client/lib/domain/models/worksheet.dart`: Removed `const` modifier from constructor to comply with Isar auto-increment ID fields.
-- `client/lib/domain/models/task.dart`: Removed `const` modifier from constructor to comply with Isar auto-increment ID fields.
-- `client/lib/domain/models/subject.dart`: Added `final String colorHex` property with default fallback (`#9C27B0`).
-- `client/lib/presentation/screens/worksheet_screen.dart`: Added null check fallback `problemText ?? ''` and null guard for map indexing `_answers[problem.id!]`.
-- `client/lib/presentation/screens/quiz_screen.dart`: Added null guards for `questionText ?? ''` and `question.options?.length ?? 0`.
-
-### 3. Generated Code Maintenance
-- Executed `flutter pub run build_runner build --delete-conflicting-outputs` to regenerate Isar schema files (`worksheet.g.dart`, `subject.g.dart`, `task.g.dart`).
-
-### 4. Final Verification Results
-- **`flutter analyze`:** **0 Errors**. 275 non-blocking warnings/infos remaining (primarily experimental Isar generated code warnings, unused imports in `main.dart`, and UI deprecation hints).
-- **`flutter test`:** **PASSED**. 2/2 tests passed (`scheduling_engine_test.dart`, `widget_test.dart`).
-- **Android Build Status:** `ANDROID BUILD: BLOCKED — Android SDK unavailable`
-- **iOS Build Status:** `IOS BUILD: NOT EXECUTABLE IN CURRENT ENVIRONMENT`
-
-### 5. Security Boundary & Non-Regression
-- Zero changes were made to security architecture, Supabase Auth configuration, RLS policies, or authentication dependencies.
-- A1 Authentication code remains intact.
+**Status:** COMPLETE (Committed in `3e715cb`)
 
 ---
 
-## Phase A1: Authentication
+## Phase A1 — Authentication Verification
 **Date:** 2026-08-12  
-**Status:** IMPLEMENTED — VERIFICATION READY
+**Status:** IMPLEMENTED — VERIFICATION PARTIALLY BLOCKED (MANUAL E2E TESTING REQUIRED)
 
-### Scope & Architecture
-- Production execution path uses `SupabaseAuthService` (`gotrue`).
-- `MockAuthService` is strictly isolated using `kDebugMode && dotenv.env['USE_MOCK_AUTH'] == 'true'` and tree-shaken from release builds.
-- Account deletion RPC workflow remains marked as NOT YET PRODUCTION READY until server-side RPC deployment in Phase A3/A4.
+### 1. Manual Testing Readiness Checklist
+The application has zero compilation errors and is fully prepared for manual end-to-end testing against the development Supabase project (`https://rfeaionnlnjergnystcd.supabase.co`).
+
+| Flow / Scenario | Testing Readiness | Environment Requirement / Limitation |
+|---|---|---|
+| **1. Signup** | `READY FOR MANUAL TEST` | Requires dev Supabase instance & UI run on device/emulator. |
+| **2. Email Verification** | `READY FOR MANUAL TEST` | Requires live email delivery / inbox access for dev account. |
+| **3. Login (Valid Credentials)** | `READY FOR MANUAL TEST` | Requires registered test account in dev Supabase. |
+| **4. Invalid Login** | `READY FOR MANUAL TEST` | Can be verified immediately on UI with invalid password. |
+| **5. Session Persistence** | `READY FOR MANUAL TEST` | Requires app process restart on device/emulator. |
+| **6. Logout** | `READY FOR MANUAL TEST` | `PASS` (Unit test verified; UI ready for manual tap). |
+| **7. Password Reset** | `READY FOR MANUAL TEST` | Requires email delivery verification in dev environment. |
+| **8. Logout All Devices** | `READY FOR MANUAL TEST` | Requires 2 concurrent sessions/devices logged into same dev user. |
+| **9. Auth State Restoration** | `READY FOR MANUAL TEST` | Requires app restart with cached refresh token. |
+| **10. Auth State Invalidation** | `READY FOR MANUAL TEST` | Requires revoking refresh token via Supabase Dashboard. |
+
+### 2. Instrumentation & Safe Diagnostics
+- Added safe, non-sensitive diagnostic logging in `SupabaseAuthService` using Flutter `assert()` blocks.
+- **Log Format:** `[AuthDiagnostics] Event: <event_name>` / `[AuthDiagnostics] AuthStateChanged event: <name>, UserId present: <bool>`.
+- **Privacy Assurance:** **ZERO** passwords, access tokens, refresh tokens, API keys, PII, or payload contents are logged.
+
+### 3. Automated Test Suite Classification
+- **[UNIT TEST]**: `auth_service_test.dart` (6 assertions passed). Verifies interface contract and in-memory auth state transitions.
+- **[INTEGRATION TEST]**: `NOT IMPLEMENTED`. Automated integration tests against live Supabase endpoints require an `integration_test` driver setup running against the development backend.
+
+### 4. Platform Limitations & Next Steps
+- Android SDK is not currently available in this host CLI environment (`ANDROID BUILD: BLOCKED`).
+- iOS build cannot be performed in Windows CLI environment (`IOS BUILD: NOT EXECUTABLE IN WINDOWS CLI`).
+- Manual end-to-end verification must be performed by building the Flutter client on a machine with Android Studio/Xcode or a connected physical test device.

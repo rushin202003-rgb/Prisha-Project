@@ -3,7 +3,6 @@ import '../models/journal.dart';
 import '../models/companion_config.dart';
 
 class AIPromptGeneratorService {
-  
   /// Generates a highly scoped prompt to send to the Cloud Agent
   /// based strictly on local context.
   static String generateTeachingPrompt({
@@ -13,23 +12,27 @@ class AIPromptGeneratorService {
     String? customInstructions,
   }) {
     final buffer = StringBuffer();
-    
+
     // 1. Establish Persona Boundary
     buffer.writeln('SYSTEM INSTRUCTION:');
     if (mode == CompanionMode.teacher) {
-      buffer.writeln('You are a strict but encouraging academic tutor. Teach step-by-step. Do not give the direct answer.');
+      buffer.writeln(
+          'You are a strict but encouraging academic tutor. Teach step-by-step. Do not give the direct answer.');
     } else {
-      buffer.writeln('You are a supportive, playful peer. Use fun analogies and emoji. Keep it light and encouraging.');
+      buffer.writeln(
+          'You are a supportive, playful peer. Use fun analogies and emoji. Keep it light and encouraging.');
     }
     if (customInstructions != null && customInstructions.isNotEmpty) {
       buffer.writeln('Additional constraint: $customInstructions');
     }
-    
+
     // 2. Provide Scoped Context
     buffer.writeln('\nCONTEXT:');
-    buffer.writeln('The student is currently working on: ${currentTask.title} (Type: ${currentTask.type.name})');
+    buffer.writeln(
+        'The student is currently working on: ${currentTask.title} (Type: ${currentTask.type.name})');
     if (latestMood != null) {
-      buffer.writeln('The student is currently feeling: ${latestMood.mood.name}. Adapt your tone accordingly.');
+      buffer.writeln(
+          'The student is currently feeling: ${latestMood.mood.name}. Adapt your tone accordingly.');
     }
 
     // 3. User Request Placeholder

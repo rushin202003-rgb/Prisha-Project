@@ -14,7 +14,7 @@ class StudentProfile {
   final double schoolHoursPerDay;
   final String preferredTeachingMode;
 
-  const StudentProfile({
+  StudentProfile({
     required this.userId,
     required this.displayName,
     required this.grade,
@@ -37,7 +37,8 @@ class StudentProfile {
       grade: grade ?? this.grade,
       board: board ?? this.board,
       schoolHoursPerDay: schoolHoursPerDay ?? this.schoolHoursPerDay,
-      preferredTeachingMode: preferredTeachingMode ?? this.preferredTeachingMode,
+      preferredTeachingMode:
+          preferredTeachingMode ?? this.preferredTeachingMode,
     );
   }
 }
